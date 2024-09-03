@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Price Prediction</title>
+</head>
+<body>
+    <h1>Predict Stock Prices</h1>
+    <form method="post">
+        <label for="date">Enter the target date (DD/MM/YYYY):</label>
+        <input type="text" id="date" name="date" required>
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if predicted_prices is not none and target_date is not none %}
+
+        <h2>Predicted Prices from {{ target_date.date() }}:</h2>
+        <ul>
+            {% for price in predicted_prices %}
+                <li>${{ price | currency }}</li>
+            {% endfor %}
+        </ul>
+    {% elif error %}
+        <h2 style="color:rgb(104, 9, 9);">{{ error }}</h2>
+    {% endif %}
+</body>
+</html>
